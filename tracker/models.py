@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from .managers import TransactionQuerySet
 
 class User(AbstractUser):
     pass
@@ -11,7 +12,7 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
 
     def __str__(self) -> str:
-        return self.name
+        return self.name 
 
 # transaction puede ser INGRESO ó GASTO
 # has an amount
@@ -29,6 +30,8 @@ class Transaction(models.Model):
     tipo = models.CharField(max_length=7, choices=TRANSACTION_TYPE_CHOICES)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateField()
+
+    objects = TransactionQuerySet.as_manager()
 
     def __str__(self) -> str:
         return f"{self.tipo} de {self.amount} el {self.date} de {self.user}"
