@@ -31,6 +31,7 @@ class Transaction(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateField()
 
+    # custom manager that uses custom QuerySet.
     objects = TransactionQuerySet.as_manager()
 
     def __str__(self) -> str:

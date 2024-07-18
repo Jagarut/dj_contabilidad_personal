@@ -1,5 +1,7 @@
 from django.db import models
 
+# custom QuerySet class
+# To use the custom QuerySet, you need to attach it to your model's manager
 class TransactionQuerySet(models.QuerySet):
     def get_expenses(self):
         return self.filter(tipo='gasto')
